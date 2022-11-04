@@ -9,7 +9,8 @@ class UserList(ListView):
 
     def get(self, request, *args, **kwargs):
         user_list = User.objects.all()
-        return render(request, "users/users.html", {"user_list": user_list})
+        return render(request, "users/users.html", {"user_list": user_list,
+                                                    "a_user_list": "active"})
 
 
 class UserUploadFormView(FormView):
@@ -22,7 +23,7 @@ class UserUploadFormView(FormView):
         #     return render(request, self.template_name)
         # return redirect('/')
 
-        return render(request, self.template_name)
+        return render(request, self.template_name, {"a_upload_users": "active"})
 
     def post(self, request, *args, **kwargs):
         if request.user.is_superuser:
@@ -36,3 +37,5 @@ class UserUploadFormView(FormView):
             else:
                 return self.form_invalid(form)
         return redirect('/')
+
+
