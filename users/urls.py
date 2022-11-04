@@ -1,3 +1,7 @@
-import users.views
+from django.urls import path
 
-urlpatterns = ('/', users.views.UserList.as_view())
+from . import views
+
+urlpatterns = [
+    path('', views.UserList.as_view())
+    ]
