@@ -140,10 +140,11 @@ class UserUploadFormView(FormView):
                 user.save()
             except IntegrityError as err:
                 errors_number += 1
-            if errors_number:
-                messages.error(request, f'Not loaded {errors_number} users (already exist)')
-            else:
-                messages.success(request, f'Successfully uploaded all users')
+        if errors_number:
+            messages.error(request, f'Not loaded {errors_number} users (already exist)')
+            messages.success(request, f'Uploaded {len(users) - errors_number} users')
+        else:
+            messages.success(request, f'Successfully uploaded all users')
 
 
 
